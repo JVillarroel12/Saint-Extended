@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Reporte nota de entrega </ion-title>
+    <ion-button slot="end" color="danger" (click)="cerrarModal()">
+      <ion-icon name="close-outline"></ion-icon
+    ></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main>
+    <ion-row class="rowSearch">
+      <form action="" [formGroup]="formNumero">
+        <ion-card>
+          <ion-label>Ingresar Nº. Nota de Entrega: </ion-label>
+          <ion-input
+            palceholder="Numero"
+            formControlName="numero"
+            (keypress)="buscarFacturaPress($event.charCode)"
+            #input
+          ></ion-input>
+          <ion-icon name="search-outline" (click)="getNotaEntrega()"></ion-icon>
+        </ion-card>
+      </form>
+      <form action="" [formGroup]="formFecha">
+        <ion-card class="item date" id="fechaInicio">
+          <ion-label>Fecha de inicio:</ion-label>
+          <ion-input
+            placeholder="Inicio"
+            formControlName="fechaInicio"
+            [value]="valueFechaInicio"
+          ></ion-input>
+          <ion-popover
+            trigger="fechaInicio"
+            style="overflow: scroll; margin-top: -150px; margin-bottom: 20px"
+          >
+            <ng-template>
+              <ion-datetime
+                #fechaInicio
+                (ionChange)="valueFechaInicio = formatDate(fechaInicio.value)"
+                hourCycle="h12"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-card>
+        <ion-card class="item date" id="fechaFin">
+          <ion-label>Fecha fin:</ion-label>
+          <ion-input
+            placeholder="Fin"
+            formControlName="fechaFin"
+            [value]="valueFechaFin"
+          ></ion-input>
+          <ion-popover
+            trigger="fechaFin"
+            style="overflow: scroll; margin-top: -150px; margin-bottom: 20px"
+          >
+            <ng-template>
+              <ion-datetime
+                #fechaFin
+                (ionChange)="valueFechaFin = formatDate(fechaFin.value)"
+                hourCycle="h12"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-card>
+        <ion-card (click)="filtrarHistoricoFecha()" style="width: 110px;"
+          ><ion-icon name="search-outline" style="font-size: 25px"></ion-icon
+        ></ion-card>
+      </form>
+    </ion-row>
+    <ion-row class="rowContentLines">
+      <div class="contentLines" *ngIf="mostrarInfo == true">
+        <div class="header">
+          <span> </span>
+          <span>Descripcion</span>
+          <span>Nº. Documento</span>
+          <span>Fecha Edicion</span>
+          <span>Monto Total</span>
+        </div>
+        <span
+          class="lines"
+          *ngFor="let data of notaEntrega"
+          (click)="desplegarLines(data)"
+        >
+          <span>
+            <ion-icon
+              name="caret-forward"
+              *ngIf="data.desplegar == false"
+            ></ion-icon>
+            <ion-icon
+              name="caret-down"
+              *ngIf="data.desplegar == true"
+            ></ion-icon>
+          </span>
+          <span>{{data.descrip}}</span>
+          <span>{{data.numeroD}}</span>
+          <span>{{data.fechaEdit | date :'short'}}</span>
+          <span>{{data.totalPrdNuevo | number:'1.2-2'}}</span>
+          <span class="subLinesHeader columns4" *ngIf="data.desplegar == true">
+            <span></span>
+            <span>Descripcion</span>
+            <span>Precio Viejo</span>
+            <span>Precio Nuevo</span>
+            <span>Cant</span>
+            <span>Total</span>
+          </span>
+          <span class="subLinesTop columns4" *ngIf="data.desplegar == true">
+            <span
+              class="subLines"
+              *ngFor="let line of data.linesModificaciones"
+            >
+              <span></span>
+              <span>{{line.descrip1}}</span>
+              <span>{{line.precio | number:'1.2-2'}}</span>
+              <span>{{line.precioNuevo | number:'1.2-2'}}</span>
+              <span>{{line.cantidad}}</span>
+              <span>{{line.precioNuevo * line.cantidad | number:'1.2-2'}}</span>
+            </span>
+          </span>
+        </span>
+      </div>
+    </ion-row>
+  </main>
+</ion-content>

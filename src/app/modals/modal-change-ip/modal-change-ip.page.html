@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cambiar IP</ion-title>
+    <ion-button color="danger" slot="end" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form action="" [formGroup]="formIP">
+    <ion-card>
+      <ion-label>Introducir IP: </ion-label>
+      <ion-input placeholder="Ej: 192.168.123.100:5000" formControlName="IP" (keypress)="guardarIPPress($event.charCode)" #input></ion-input>
+    </ion-card>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [disabled]="!formIP.valid" (click)="guardarIp()" slot="end">Guardar</ion-button>
+  </ion-toolbar>
+</ion-footer>
