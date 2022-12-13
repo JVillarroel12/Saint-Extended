@@ -1,92 +1,22 @@
 <ion-header >
   <ion-toolbar>
+    <ion-icon name="home" slot="start"></ion-icon>
     <ion-title>
-      Editar Nota de entrega
+      Home
     </ion-title>
-    <ion-icon name="print" slot="end" class="print" (click)="abrirReporte();"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<main>
-  <ion-row class="rowSearch">
-    <form action="" [formGroup]="formNumero">
-      <ion-card>
-        <ion-label>Ingresar Nº. Nota de Entrega: </ion-label>
-        <ion-input palceholder="Numero" formControlName="numero" (keypress)="buscarFacturaPress($event.charCode)" #input></ion-input> 
-        <ion-icon name="search-outline" (click)="getNotaEntrega()"></ion-icon>
-      </ion-card>
-    </form>
-  </ion-row>
-  <ion-row class="rowContentLines">
-    <div class="contentHead" *ngIf="mostrarInfo == true">
-      <div>
-        <ion-card>
-          <ion-label>Nota de entrega Nº: {{notaEntrega.numeroD}}</ion-label>
-        </ion-card>
-        <ion-label>
-          <ion-label style="font-weight: bold;">Cliente: </ion-label>
-          <ion-label>{{notaEntrega.descrip}}</ion-label>
-        </ion-label>
-        <ion-label>
-          <ion-label style="font-weight: bold;">Rif: </ion-label>
-          <ion-label>{{notaEntrega.id3}}</ion-label>
-        </ion-label>
-        <ion-label>
-          <ion-label style="font-weight: bold;">Direccion: </ion-label>
-          <ion-label>{{notaEntrega.direc1}} {{notaEntrega.direc2}} {{notaEntrega.direc3}}</ion-label>
-        </ion-label>
-      </div>
-      <!-- <div>
-        <ion-card>
-          <ion-label>Nota de entrega  {</ion-label>
-        </ion-card>
-      </div> -->
-    </div>
-    <div class="contentLines" *ngIf="mostrarInfo == true">
-
-      <div class="grid columns-head" style=" border-top-left-radius: 5px; border-top-right-radius: 5px;">
-        <span class="grid__producto">
-          <ion-label style="font-size: 16px !important;font-weight: bold;">Producto</ion-label>
-        </span>
-        <span class="grid__precio">
-          <ion-label style="font-size: 16px !important;font-weight: bold;">Precio Actual</ion-label>
-        </span>
-        <span class="grid__cant">
-          <ion-label style="font-size: 16px !important;font-weight: bold;">Cant</ion-label>
-        </span>
-        <span class="grid__totalActual">
-          <ion-label style="font-size: 16px !important;font-weight: bold;">Total Actual</ion-label>
-        </span>
-        <span class="grid__nuevoPrecio">
-          <ion-label style="font-size: 16px !important;font-weight: bold;">Nuevo Precio</ion-label>
-        </span>
-        <span class="grid__total">
-          <ion-label style="font-size: 16px !important;font-weight: bold;">Nuevo Total</ion-label>
-        </span>
-      </div>
-
-      <span class="grid" *ngFor="let data of linesNotaEntrega">
-        <span class="grid__producto">{{data.descrip1}}</span>
-        <span class="grid__precio">{{data.precio | number:'1.2-2'}}</span>
-        <span class="grid__cant">{{data.cantidad | number:'1.2-2'}}</span>
-        <span class="grid__totalActual">{{data.totalItem | number:'1.2-2'}}</span>
-        <span class="grid__nuevoPrecio">
-          <ion-input placeholder="Ingresar precio" [(ngModel)]="data.nuevoPrecio" type="number"></ion-input>
-        </span>
-        <span class="grid__total">{{data.cantidad * data.nuevoPrecio | number:'1.2-2'}}</span>
-      </span>
-
-    </div>
-  </ion-row>
-</main>
-
+  <main>
+    <ion-card *ngIf="activarNotaEntrega == 'true'" (click)="navegar('/nota-entrega')">
+      <ion-icon name="pencil"></ion-icon>
+      <span>Editar Nota de Entrega</span> 
+    </ion-card>
+    <ion-card *ngIf="activarNotaDebito == 'true'" (click)="navegar('/nota-debito')">
+      <ion-icon name="pencil"></ion-icon>
+      <span>Editar Nota de Debito</span>  
+    </ion-card>
+  </main>
+  <div class="changeIp" (click)="cambiarIp()"></div>
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <div class="changeIp" (click)="cambiarIp()">
-
-    </div>
-    <ion-button slot="end" (click)="guardarNotaEntrega()">Guardar</ion-button>
-  </ion-toolbar>
-</ion-footer>

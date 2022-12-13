@@ -9,7 +9,7 @@ import { IonInput, ModalController } from '@ionic/angular';
 })
 export class ModalChangeIpPage implements OnInit {
   formIP: FormGroup;
-  ip = localStorage.getItem("IP");
+  ip = localStorage.getItem("saintIP");
   @ViewChild('input', { static: false }) input: IonInput;
   constructor(
     public modalController: ModalController,
@@ -28,7 +28,7 @@ export class ModalChangeIpPage implements OnInit {
 
     if(formValue.IP != '' || formValue.IP != null || formValue.IP != undefined){
 
-      localStorage.setItem("IP", formValue.IP);
+      localStorage.setItem("saintIP", formValue.IP);
       console.log("IP SALIENDO =>", formValue.IP);
       
       this.modalController.dismiss({

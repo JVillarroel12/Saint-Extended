@@ -5,10 +5,12 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class ApiService {
-  IP = 'http://' + localStorage.getItem("IP") + '/api/';
+  IP = 'http://' + localStorage.getItem("saintIP") + '/api/';
   getNotaEntrega = this.IP + 'nota-entrega/';
   getHistoricoNotaEntrega = this.IP + 'nota-entrega-historico/';
-  getHistoricoFecha = this.IP + 'nota-entrega-historico/'
+  getHistoricoFecha = this.IP + 'nota-entrega-historico/';
+  getNotaDebito = this.IP + 'nota-debito/';
+  getCliente = this.IP + 'Saclies/';
 
   constructor(
     public toastController: ToastController

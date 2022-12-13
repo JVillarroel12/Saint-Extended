@@ -18,7 +18,19 @@ const routes: Routes = [
   {
     path: 'modal-reporte',
     loadChildren: () => import('./modals/modal-reporte/modal-reporte.module').then( m => m.ModalReportePageModule)
+  },  {
+    path: 'nota-entrega',
+    loadChildren: () => import('./views/nota-entrega/nota-entrega.module').then( m => m.NotaEntregaPageModule)
   },
+  {
+    path: 'nota-debito',
+    loadChildren: () => import('./views/nota-debito/nota-debito.module').then( m => m.NotaDebitoPageModule)
+  },
+  {
+    path: 'configuracion',
+    loadChildren: () => import('./modals/configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
+  },
+
 ];
 
 @NgModule({

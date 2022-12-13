@@ -1,0 +1,91 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-button class="home" slot="start" (click)="home()">
+      <ion-icon name="home"></ion-icon>
+      <span>Home</span>    
+    </ion-button>
+    <ion-title>
+      Editar Nota de Debito
+    </ion-title>
+    <!-- <ion-icon name="print" slot="end" class="print" (click)="abrirReporte();"></ion-icon> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main>
+    <ion-row class="rowSearch">
+      <form action="" [formGroup]="formNumero">
+        <ion-card>
+          <ion-label>Ingresar Nº. Nota de Debito: </ion-label>
+          <ion-input palceholder="Numero" formControlName="numero" (keypress)="buscarFacturaPress($event.charCode)" #input></ion-input> 
+          <ion-icon name="search-outline" (click)="getNotaDebito()"></ion-icon>
+        </ion-card>
+      </form>
+    </ion-row>
+    <ion-row class="rowContentLines">
+      <div class="contentHead" *ngIf="mostrarInfo == true">
+        <div>
+          <ion-card>
+            <ion-label style="color: black;">Nota de Debito Nº: {{notaDebito.nroUnico}}</ion-label>
+          </ion-card>
+          <ion-label>
+            <ion-label style="font-weight: bold;">Cliente: </ion-label>
+            <ion-label>{{datosCliente.descrip}}</ion-label>
+          </ion-label>
+          <ion-label>
+            <ion-label style="font-weight: bold;">Rif: </ion-label>
+            <ion-label>{{datosCliente.id3}}</ion-label>
+          </ion-label>
+          <ion-label>
+            <ion-label style="font-weight: bold;">Direccion: </ion-label>
+            <ion-label>{{datosCliente.direc1}}</ion-label>
+          </ion-label>
+        </div>
+        <!-- <div>
+          <ion-card>
+            <ion-label>Nota de entrega  {</ion-label>
+          </ion-card>
+        </div> -->
+      </div>
+      <div class="contentLines" *ngIf="mostrarInfo == true">
+  
+        <div class="grid columns-head" style=" border-top-left-radius: 5px; border-top-right-radius: 5px;">
+          <span class="grid__documento">
+            <ion-label style="font-size: 16px !important;font-weight: bold;">Documento</ion-label>
+          </span>
+          <span class="grid__montoBsActual">
+            <ion-label style="font-size: 16px !important;font-weight: bold;">Monto Bs Actual</ion-label>
+          </span>
+          <span class="grid__montoDolarActual">
+            <ion-label style="font-size: 16px !important;font-weight: bold;">Monto $ Actual</ion-label>
+          </span>
+          <span class="grid__nuevoMontoBs">
+            <ion-label style="font-size: 16px !important;font-weight: bold;">Nuevo Monto bs</ion-label>
+          </span>
+          <span class="grid__nuevoMontoDolar">
+            <ion-label style="font-size: 16px !important;font-weight: bold;">Nuevo monto $</ion-label>
+          </span>
+
+        </div>
+  
+        <span class="grid" *ngFor="let data of [notaDebito]">
+          <span class="grid__documento">{{data.document}}</span>
+          <span class="grid__montoBsActual">{{data.saldo | number:'1.2-2'}}</span>
+          <span class="grid__montoDolarActual">{{data.montoMex | number:'1.2-2'}}</span>
+          <span class="grid__nuevoMontoBs">
+            <ion-input placeholder="Ingresar precio" [(ngModel)]="data.nuevoPrecioBs" type="number"></ion-input>
+          </span>
+          <span class="grid__nuevoMontoDolar">
+            <ion-input placeholder="Ingresar precio" [(ngModel)]="data.nuevoPrecioDolar" type="number"></ion-input>
+          </span>
+        </span>
+  
+      </div>
+    </ion-row>
+  </main>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button slot="end" (click)="guardarNotaDebito()">Guardar</ion-button>
+  </ion-toolbar>
+</ion-footer>

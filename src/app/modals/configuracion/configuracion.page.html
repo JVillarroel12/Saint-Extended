@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configuracion</ion-title>
+    <ion-button color="danger" (click)="cerralModal()" slot="end" style="margin-right: 10px;"><ion-icon name="close"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form action="" [formGroup]="form">
+
+    <ion-row class="rowMain">
+        <ion-col size="4" class="colList">
+            <div (click)="mostrarElementos('ip')">
+              Cambiar IP
+            </div>
+            <div (click)="mostrarElementos('reservacion')">
+              Activar
+            </div>
+        </ion-col>
+        <ion-col size="8" class="colContent">
+          <div class="IP" *ngIf="mostrarIP == true">
+              <ion-card>
+                      <ion-label>Introducir la IP: </ion-label>
+                      <ion-input placeholder="Ej: 192.168.123.99:4000" formControlName="IP" [value]="ip" (keypress)="pressGuardar($event.charCode)"></ion-input>
+              </ion-card>
+          </div>
+            <div class="reservaciones" *ngIf="mostrarReservaciones == true">
+                <ion-card>
+                  <ion-card-content>
+                    <ion-checkbox formControlName="activarNotaEntrega"></ion-checkbox>
+                    <ion-label>Activar Nota de Entrega</ion-label>
+                  </ion-card-content>
+                </ion-card>
+                <ion-card>
+                  <ion-card-content>
+                    <ion-checkbox formControlName="activarNotaDebito"></ion-checkbox>
+                    <ion-label>Activar Nota Debito</ion-label>
+                  </ion-card-content>
+                </ion-card>
+            </div>
+        </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <ion-button (click)="guardarConfiguracion()" slot="end" class="guardarConfiguracion">Guardar</ion-button>
+  </ion-toolbar>
+</ion-footer>
